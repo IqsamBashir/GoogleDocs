@@ -1,0 +1,72 @@
+.toolbar {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 40px;
+  background-color: #eaf1f6;
+  border-radius: 3rem;
+  margin-bottom: 5px;
+  justify-content: center;
+}
+
+.toolbar button {
+  border: none;
+  background-color: #eaf1f6;
+  padding: 10px;
+}
+.toolbar button:hover {
+  background-color: #dee0e1;
+}
+
+.textarea {
+  margin-left: 20px;
+  width: 82rem;
+  height: 31rem;
+}
+
+.newfile {
+  background: #fff;
+  border: 1px solid #9fa2a6;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  margin-left: 20px;
+  height: 200px;
+  width: 150px;
+  margin-top: 20px;
+}
+
+.googleplusicon {
+  height: 180px;
+  width: 150px;
+}
+
+.inputbox {
+  margin-left: 15px;
+  margin-bottom: 5px;
+  border: none;
+}
+
+.inputbox:hover {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.navigationBar {
+  display: flex;
+  justify-content: center;
+}
+
+.navigationBar button {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0 5px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.navigationBar button:hover {
+  background-color: rgb(211, 211, 211);
+  border-radius: 5px;
+}
