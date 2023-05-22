@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Link, Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-const ToggleSidebar = () => {
+const Sidebar = (props) => {
   const [isOpen, setIsopen] = useState(false);
+
+  useEffect(() => {
+    const handleBackClick = () => {
+      props.onSelect(true);
+    };
+
+    window.onpopstate = handleBackClick;
+
+    return () => {
+      window.onpopstate = null;
+    };
+  }, []);
 
   const toggleSidebar = () => {
     isOpen === true ? setIsopen(false) : setIsopen(true);
@@ -15,22 +27,36 @@ const ToggleSidebar = () => {
   return (
     <>
       <div className="container-fluid mt-3">
-        <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-md">
-          <div className="container-fluid p-2">
-            <div className="btn" onClick={toggleSidebar}>
-              <FontAwesomeIcon icon={faBars} />
+        {props.header && (
+          <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-md">
+            <div className="container-fluid p-2">
+              <div className="btn" onClick={toggleSidebar}>
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+              <a className="navbar-brand text-secondary mr-0 ml-3 font-weight-400">
+                <img
+                  className="mainLogo"
+                  src="https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png"
+                  alt="docsLogo"
+                />
+                DOCS
+              </a>
+              <div className="form-inline ml-auto"></div>
             </div>
-            <a className="navbar-brand text-secondary mr-0 ml-3 font-weight-400">
-              <img
-                className="mainLogo"
-                src="https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png"
-                alt="docsLogo"
-              />
-              DOCS
-            </a>
-            <div className="form-inline ml-auto"></div>
-          </div>
-        </nav>
+            <nav class="navbar bg-body-tertiary">
+              <div class="container-fluid">
+                <form class="d-flex" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  ></input>
+                </form>
+              </div>
+            </nav>
+          </nav>
+        )}
         <div className={`sidebar ${isOpen == true ? "active" : ""}`}>
           <div className="sd-header">
             <h4 className="mb-0">
@@ -40,7 +66,6 @@ const ToggleSidebar = () => {
               />{" "}
               Slides
             </h4>
-            <div onClick={toggleSidebar}></div>
           </div>
           <div className="sd-body">
             <ul>
@@ -50,7 +75,7 @@ const ToggleSidebar = () => {
                   className="icons-h"
                   alt="Docs"
                 />
-                <Link to="/Toolbar" className="sd-link">
+                <Link onClick={toggleSidebar} to="/Toolbar" className="sd-link">
                   Docs
                 </Link>
               </li>
@@ -65,7 +90,11 @@ const ToggleSidebar = () => {
                     src="https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
                     className="icons-h"
                   />
-                  <Link to="/Contact" className="sd-link">
+                  <Link
+                    onClick={toggleSidebar}
+                    to="/Contact"
+                    className="sd-link"
+                  >
                     Sheets
                   </Link>
                 </a>
@@ -80,7 +109,11 @@ const ToggleSidebar = () => {
                     src="https://www.gstatic.com/images/branding/product/1x/slides_2020q4_48dp.png"
                     className="icons-h"
                   />{" "}
-                  <Link to="/Contact" className="sd-link">
+                  <Link
+                    onClick={toggleSidebar}
+                    to="/Contact"
+                    className="sd-link"
+                  >
                     Slides
                   </Link>
                 </a>
@@ -91,7 +124,11 @@ const ToggleSidebar = () => {
                     src="https://www.gstatic.com/images/branding/product/1x/forms_2020q4_48dp.png"
                     className="icons-h"
                   />
-                  <Link to="/Contact" className="sd-link">
+                  <Link
+                    onClick={toggleSidebar}
+                    to="/Contact"
+                    className="sd-link"
+                  >
                     Forms
                   </Link>
                 </a>
@@ -107,6 +144,5 @@ const ToggleSidebar = () => {
     </>
   );
 };
-// ReactDOM.render(<ToggleSidebar />, document.getElementById("root"));
 
-export default ToggleSidebar;
+export default Sidebar;

@@ -1,27 +1,25 @@
 import "./App.css";
-import Contact from "./pages/Toolbar";
-import React from "react";
+import Toolbar from "./Toolbar/Toolbar";
+import React, { useState } from "react";
 import { Route, Routes, Router } from "react-router-dom";
-import ToggleSidebar from "./sidebar/sideBar";
+import Sidebar from "./sidebar/sideBar";
 
-// 👇️ don't wrap in <Router>
 export default function App() {
+  const [header, setHeader] = useState(true);
+  const handleTextArea = (value) => {
+    setHeader(value);
+  };
   return (
     <>
       <div>
-        <ToggleSidebar />
+        <Sidebar header={header} onSelect={handleTextArea} />
         <Routes>
-          <Route path="/Toolbar" element={<Contact />} />
+          <Route
+            path="/Toolbar"
+            element={<Toolbar onSelect={handleTextArea} />}
+          />
         </Routes>
       </div>
     </>
   );
 }
-
-// function Home() {
-//   return <h2>Home</h2>;
-// }
-
-// function About() {
-//   return <h2>About</h2>;
-// }
